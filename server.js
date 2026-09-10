@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-//  DADOS INICIAIS 
+ 
 
 let partidas = [
   {
@@ -67,26 +67,26 @@ let gols = [
 
 
 
-// Listar 
+
 app.get('/partidas', (req, res) => {
   res.status(200).json(partidas);
 });
 
-// Mostrar uma específica
+
 app.get('/partidas/:id', (req, res) => {
   const partida = partidas.find(p => p.id == req.params.id);
   if (!partida) return res.status(404).json({ erro: "Partida não encontrada" });
   res.status(200).json(partida);
 });
 
-// Criar 
+
 app.post('/partidas', (req, res) => {
   const novaPartida = { id: partidas.length + 1, ...req.body };
   partidas.push(novaPartida);
   res.status(201).json(novaPartida);
 });
 
-// Editar 
+
 app.put('/partidas/:id', (req, res) => {
   const index = partidas.findIndex(p => p.id == req.params.id);
   if (index === -1) return res.status(404).json({ erro: "Partida não encontrada" });
@@ -95,7 +95,7 @@ app.put('/partidas/:id', (req, res) => {
   res.status(200).json(partidas[index]);
 });
 
-// Apagar partida
+
 app.delete('/partidas/:id', (req, res) => {
   const index = partidas.findIndex(p => p.id == req.params.id);
   if (index === -1) return res.status(404).json({ erro: "Partida não encontrada" });
@@ -106,26 +106,26 @@ app.delete('/partidas/:id', (req, res) => {
 
 
 
-// Listar 
+ 
 app.get('/gols', (req, res) => {
   res.status(200).json(gols);
 });
 
-// Mostrar um específico
+
 app.get('/gols/:id', (req, res) => {
   const gol = gols.find(g => g.id == req.params.id);
   if (!gol) return res.status(404).json({ erro: "Gol não encontrado" });
   res.status(200).json(gol);
 });
 
-// Criar 
+
 app.post('/gols', (req, res) => {
   const novoGol = { id: gols.length + 1, ...req.body };
   gols.push(novoGol);
   res.status(201).json(novoGol);
 });
 
-// Editar 
+
 app.put('/gols/:id', (req, res) => {
   const index = gols.findIndex(g => g.id == req.params.id);
   if (index === -1) return res.status(404).json({ erro: "Gol não encontrado" });
@@ -134,7 +134,7 @@ app.put('/gols/:id', (req, res) => {
   res.status(200).json(gols[index]);
 });
 
-// Apagar 
+
 app.delete('/gols/:id', (req, res) => {
   const index = gols.findIndex(g => g.id == req.params.id);
   if (index === -1) return res.status(404).json({ erro: "Gol não encontrado" });
